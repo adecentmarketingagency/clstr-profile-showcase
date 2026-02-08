@@ -7,12 +7,38 @@ import { TemplateId } from "@/types/profile";
 import { Button } from "@/components/ui/button";
 import { Check, Eye, X, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import MinimalTemplate from "@/components/templates/MinimalTemplate";
+import ElianaTemplate from "@/components/templates/ElianaTemplate";
+import TypefolioTemplate from "@/components/templates/TypefolioTemplate";
+import GeekyTemplate from "@/components/templates/GeekyTemplate";
+
+function TemplatePreview({ templateId, profile }: { templateId: TemplateId; profile: any }) {
+  // Create a modified profile with the selected template for preview
+  const previewProfile = {
+    ...profile,
+    settings: {
+      ...profile.settings,
+      template: templateId,
+    },
+  };
+
+  switch (templateId) {
+    case "eliana":
+      return <ElianaTemplate profile={previewProfile} />;
+    case "typefolio":
+      return <TypefolioTemplate profile={previewProfile} />;
+    case "geeky":
+      return <GeekyTemplate profile={previewProfile} />;
+    default:
+      return <MinimalTemplate profile={previewProfile} />;
+  }
+}
 
 export default function TemplatePicker() {
   const { profile, updateSettings } = useProfile();
   const navigate = useNavigate();
   const [selected, setSelected] = useState<TemplateId>(profile.settings.template);
-  const [previewing, setPreviewing] = useState<string | null>(null);
+  const [previewingTemplate, setPreviewingTemplate] = useState<TemplateId | null>(null);
 
   const handleConfirm = () => {
     updateSettings({ template: selected });
@@ -26,7 +52,7 @@ export default function TemplatePicker() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between mb-10"
+          className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10"
         >
           <div className="flex items-center gap-4">
             <Link to="/editor">
@@ -35,7 +61,7 @@ export default function TemplatePicker() {
               </Button>
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-white">Choose a Template</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-white">Choose a Template</h1>
               <p className="text-white/50 text-sm mt-1">
                 Preview templates before applying to your portfolio.
               </p>
@@ -43,14 +69,14 @@ export default function TemplatePicker() {
           </div>
           <Button
             onClick={handleConfirm}
-            className="bg-white text-black hover:bg-white/90 gap-2 font-semibold"
+            className="bg-white text-black hover:bg-white/90 gap-2 font-semibold w-full sm:w-auto"
           >
             <Check className="w-4 h-4" /> Apply Template
           </Button>
         </motion.div>
 
         {/* Template Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {templates.map((t, i) => {
             const isSelected = selected === t.id;
             return (
@@ -67,7 +93,7 @@ export default function TemplatePicker() {
                 }`}
               >
                 {/* Preview thumbnail area */}
-                <div className="h-48 bg-gradient-to-br from-white/[0.04] to-white/[0.02] flex items-center justify-center relative overflow-hidden">
+                <div className="h-40 sm:h-48 bg-gradient-to-br from-white/[0.04] to-white/[0.02] flex items-center justify-center relative overflow-hidden">
                   {t.thumbnail ? (
                     <img 
                       src={t.thumbnail} 
@@ -83,9 +109,7 @@ export default function TemplatePicker() {
                     <Button
                       onClick={(e) => {
                         e.stopPropagation();
-                        // Preview user's own portfolio with the selected template
-                        updateSettings({ template: t.id });
-                        setPreviewing(`/portfolio/${profile.settings.slug}`);
+                        setPreviewingTemplate(t.id);
                       }}
                       variant="ghost"
                       className="text-white border border-white/30 hover:bg-white/20 gap-2"
@@ -95,16 +119,16 @@ export default function TemplatePicker() {
                   </div>
                 </div>
 
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-white">{t.name}</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-white">{t.name}</h3>
                     {isSelected && (
                       <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
                         <Check className="w-4 h-4 text-black" />
                       </div>
                     )}
                   </div>
-                  <p className="text-white/40 text-sm mt-1">{t.description}</p>
+                  <p className="text-white/40 text-xs sm:text-sm mt-1">{t.description}</p>
                   {t.id === profile.settings.template && (
                     <span className="inline-block mt-3 text-xs px-2 py-0.5 rounded bg-white/10 text-white/50">
                       Current
@@ -117,26 +141,27 @@ export default function TemplatePicker() {
         </div>
       </div>
 
-      {/* Preview Modal */}
+      {/* Preview Modal - Now renders the actual template component */}
       <AnimatePresence>
-        {previewing && (
+        {previewingTemplate && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
-            onClick={() => setPreviewing(null)}
+            className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-2 sm:p-4"
+            onClick={() => setPreviewingTemplate(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-6xl h-[85vh] bg-white rounded-2xl overflow-hidden relative"
+              className="w-full max-w-6xl h-[90vh] bg-white rounded-2xl overflow-hidden relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="absolute top-4 right-4 z-10">
+              {/* Close button */}
+              <div className="absolute top-4 right-4 z-20">
                 <Button
-                  onClick={() => setPreviewing(null)}
+                  onClick={() => setPreviewingTemplate(null)}
                   variant="ghost"
                   size="icon"
                   className="bg-black/50 text-white hover:bg-black/70 rounded-full"
@@ -144,11 +169,32 @@ export default function TemplatePicker() {
                   <X className="w-5 h-5" />
                 </Button>
               </div>
-              <iframe
-                src={previewing}
-                className="w-full h-full border-0"
-                title="Template Preview"
-              />
+              
+              {/* Template name badge */}
+              <div className="absolute top-4 left-4 z-20">
+                <span className="bg-black/70 text-white text-xs px-3 py-1.5 rounded-full font-medium">
+                  {templates.find(t => t.id === previewingTemplate)?.name} Template
+                </span>
+              </div>
+
+              {/* Apply button */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
+                <Button
+                  onClick={() => {
+                    setSelected(previewingTemplate);
+                    updateSettings({ template: previewingTemplate });
+                    setPreviewingTemplate(null);
+                  }}
+                  className="bg-black text-white hover:bg-black/80 gap-2 shadow-lg"
+                >
+                  <Check className="w-4 h-4" /> Use This Template
+                </Button>
+              </div>
+
+              {/* Scrollable template preview */}
+              <div className="h-full overflow-y-auto">
+                <TemplatePreview templateId={previewingTemplate} profile={profile} />
+              </div>
             </motion.div>
           </motion.div>
         )}

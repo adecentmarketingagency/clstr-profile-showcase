@@ -1,0 +1,85 @@
+import { ProfileData } from "@/types/profile";
+
+export const mockProfile: ProfileData = {
+  name: "Arjun Mehta",
+  photo: "",
+  role: "Full-Stack Developer & CS Student",
+  about: "I'm a third-year Computer Science student passionate about building products that solve real problems. Currently exploring systems design, open-source contributions, and startup culture.",
+  location: "Bangalore, India",
+  email: "arjun@example.com",
+  linkedin: "linkedin.com/in/arjunmehta",
+  github: "github.com/arjunmehta",
+  website: "",
+  education: [
+    {
+      id: "1",
+      institution: "Indian Institute of Technology, Bangalore",
+      degree: "B.Tech",
+      field: "Computer Science & Engineering",
+      startYear: "2022",
+      endYear: "2026",
+    },
+  ],
+  experience: [
+    {
+      id: "1",
+      company: "Razorpay",
+      role: "Software Engineering Intern",
+      description: "Built internal dashboards and improved API response times by 30%. Worked on payment gateway integrations.",
+      startDate: "May 2025",
+      endDate: "Aug 2025",
+      current: false,
+    },
+    {
+      id: "2",
+      company: "Open Source Contributor",
+      role: "Contributor – React Native",
+      description: "Fixed accessibility issues and contributed to documentation improvements.",
+      startDate: "Jan 2024",
+      endDate: "",
+      current: true,
+    },
+  ],
+  skills: ["React", "TypeScript", "Node.js", "Python", "PostgreSQL", "Tailwind CSS", "Docker", "Git", "Figma", "System Design"],
+  projects: [
+    {
+      id: "1",
+      title: "StudySync",
+      description: "A collaborative note-taking app for students with real-time sync and markdown support.",
+      link: "https://github.com/arjunmehta/studysync",
+      tags: ["React", "Firebase", "Tailwind"],
+    },
+    {
+      id: "2",
+      title: "HealthTrack API",
+      description: "RESTful API for tracking health metrics with JWT authentication and rate limiting.",
+      link: "https://github.com/arjunmehta/healthtrack",
+      tags: ["Node.js", "Express", "MongoDB"],
+    },
+  ],
+  posts: [
+    {
+      id: "1",
+      title: "Why I switched from REST to GraphQL",
+      content: "After building three projects with REST, I decided to try GraphQL. Here's what I learned about trade-offs, developer experience, and when each makes sense.",
+      date: "2025-12-15",
+    },
+    {
+      id: "2",
+      title: "My internship experience at Razorpay",
+      content: "A reflection on what I learned during my summer internship — from code reviews to shipping production features.",
+      date: "2025-09-01",
+    },
+  ],
+  settings: {
+    isLive: true,
+    showAbout: true,
+    showEducation: true,
+    showExperience: true,
+    showSkills: true,
+    showProjects: true,
+    showPosts: true,
+    slug: "arjun-mehta",
+    template: "minimal",
+  },
+};

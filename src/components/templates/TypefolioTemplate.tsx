@@ -31,47 +31,47 @@ export default function TypefolioTemplate({ profile }: { profile: ProfileData })
   return (
     <div className="min-h-screen bg-white">
       {/* Banner */}
-      <div className="h-52 bg-gradient-to-br from-amber-100 via-orange-100 to-rose-100 relative overflow-hidden">
+      <div className="h-36 sm:h-52 bg-gradient-to-br from-amber-100 via-orange-100 to-rose-100 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIj48cGF0aCBkPSJNMCAyMGgyME0yMCAwdjIwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMCwwLDAsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==')] opacity-50" />
       </div>
 
       {/* Profile card */}
-      <div className="max-w-3xl mx-auto px-6 -mt-16 relative">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 -mt-12 sm:-mt-16 relative">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={idx++}
-          className="flex flex-col sm:flex-row items-start gap-5"
+          className="flex flex-col items-center sm:items-start sm:flex-row gap-4 sm:gap-5 text-center sm:text-left"
         >
-          <div className="w-28 h-28 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-3xl font-bold border-4 border-white shadow-lg shrink-0">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold border-4 border-white shadow-lg shrink-0 relative">
             {initials}
-            <span className="absolute bottom-1 right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white" />
+            <span className="absolute bottom-1 right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-400 rounded-full border-2 border-white" />
           </div>
-          <div className="flex-1 pt-2">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="flex-1 pt-0 sm:pt-2">
+            <div className="flex flex-col gap-3">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">{profile.name}</h1>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">{profile.name}</h1>
                 <p className="text-purple-600 font-medium text-sm">{profile.role}</p>
                 {profile.location && (
-                  <p className="flex items-center gap-1 text-gray-400 text-sm mt-1">
+                  <p className="flex items-center justify-center sm:justify-start gap-1 text-gray-400 text-sm mt-1">
                     <MapPin className="w-3.5 h-3.5" /> {profile.location}
                   </p>
                 )}
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
                 {profile.linkedin && (
-                  <a href={`https://${profile.linkedin}`} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:border-gray-400 transition-all">
+                  <a href={`https://${profile.linkedin}`} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:border-gray-400 transition-all">
                     <Linkedin className="w-4 h-4" />
                   </a>
                 )}
                 {profile.github && (
-                  <a href={`https://${profile.github}`} target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:border-gray-400 transition-all">
+                  <a href={`https://${profile.github}`} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:border-gray-400 transition-all">
                     <Github className="w-4 h-4" />
                   </a>
                 )}
                 {profile.email && (
-                  <a href={`mailto:${profile.email}`} className="flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors">
+                  <a href={`mailto:${profile.email}`} className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-gray-900 text-white text-xs sm:text-sm font-medium rounded-full hover:bg-gray-800 transition-colors">
                     <Zap className="w-3.5 h-3.5" /> Get in touch
                   </a>
                 )}
@@ -80,9 +80,9 @@ export default function TypefolioTemplate({ profile }: { profile: ProfileData })
           </div>
         </motion.div>
 
-        <hr className="my-10 border-gray-100" />
+        <hr className="my-8 sm:my-10 border-gray-100" />
 
-        <div className="space-y-14 pb-20">
+        <div className="space-y-10 sm:space-y-14 pb-16 sm:pb-20">
           {/* About */}
           {s.showAbout && profile.about && (
             <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={idx++}>
@@ -139,10 +139,10 @@ export default function TypefolioTemplate({ profile }: { profile: ProfileData })
 
           {/* Projects */}
           {s.showProjects && profile.projects.length > 0 && (
-            <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={idx++}>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-6">Featured Work</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {profile.projects.map((proj) => (
+          <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={idx++}>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-4 sm:mb-6">Featured Work</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              {profile.projects.map((proj) => (
                   <div key={proj.id} className="rounded-xl border border-gray-100 p-5 hover:shadow-lg transition-shadow bg-gray-50/50">
                     <div className="flex items-start justify-between">
                       <h3 className="font-bold text-gray-900">{proj.title}</h3>

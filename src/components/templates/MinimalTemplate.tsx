@@ -37,27 +37,27 @@ export default function MinimalTemplate({ profile }: { profile: ProfileData }) {
 
   return (
     <div className={`min-h-screen ${bg} transition-colors duration-300`}>
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-end mb-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-end mb-6 sm:mb-8">
           <button onClick={() => setDark(!dark)} className={`p-2.5 rounded-full border transition-colors ${toggleBg} ${toggleText}`} aria-label="Toggle theme">
             {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
         </motion.div>
 
-        <motion.header variants={fadeUp} initial="hidden" animate="visible" custom={sectionIndex++} className="mb-12">
-          <div className="flex items-start gap-5">
-            <div className={`w-20 h-20 rounded-full border flex items-center justify-center text-2xl font-bold shrink-0 ${avatarBg}`}>
+        <motion.header variants={fadeUp} initial="hidden" animate="visible" custom={sectionIndex++} className="mb-8 sm:mb-12">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 text-center sm:text-left">
+            <div className={`w-20 h-20 sm:w-20 sm:h-20 rounded-full border flex items-center justify-center text-2xl font-bold shrink-0 ${avatarBg}`}>
               {profile.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
             </div>
             <div>
-              <h1 className={`text-3xl font-bold leading-tight ${text}`}>{profile.name}</h1>
-              <p className={`text-lg mt-1 ${textMuted}`}>{profile.role}</p>
-              <div className={`flex flex-wrap items-center gap-4 mt-3 text-sm ${textSubtle}`}>
+              <h1 className={`text-2xl sm:text-3xl font-bold leading-tight ${text}`}>{profile.name}</h1>
+              <p className={`text-base sm:text-lg mt-1 ${textMuted}`}>{profile.role}</p>
+              <div className={`flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 mt-3 text-sm ${textSubtle}`}>
                 {profile.location && <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> {profile.location}</span>}
                 {profile.email && <a href={`mailto:${profile.email}`} className={`flex items-center gap-1 transition-colors ${textLink}`}><Mail className="w-3.5 h-3.5" /> {profile.email}</a>}
               </div>
               {(profile.linkedin || profile.github) && (
-                <div className="flex gap-3 mt-3">
+                <div className="flex gap-3 mt-3 justify-center sm:justify-start">
                   {profile.linkedin && <a href={`https://${profile.linkedin}`} target="_blank" rel="noreferrer" className={`text-sm transition-colors ${textLink}`}>LinkedIn ↗</a>}
                   {profile.github && <a href={`https://${profile.github}`} target="_blank" rel="noreferrer" className={`text-sm transition-colors ${textLink}`}>GitHub ↗</a>}
                 </div>
@@ -66,7 +66,7 @@ export default function MinimalTemplate({ profile }: { profile: ProfileData }) {
           </div>
         </motion.header>
 
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           {s.showAbout && profile.about && (
             <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={sectionIndex++}>
               <h2 className={`text-xs font-semibold uppercase tracking-[0.2em] mb-4 ${sectionLabel}`}>About</h2>
@@ -123,14 +123,14 @@ export default function MinimalTemplate({ profile }: { profile: ProfileData }) {
           {s.showProjects && profile.projects.length > 0 && (
             <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={sectionIndex++}>
               <h2 className={`text-xs font-semibold uppercase tracking-[0.2em] mb-4 ${sectionLabel}`}>Projects</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {profile.projects.map((proj) => (
-                  <div key={proj.id} className={`border rounded-xl p-4 ${cardBg}`}>
+                  <div key={proj.id} className={`border rounded-xl p-3 sm:p-4 ${cardBg}`}>
                     <div className="flex items-start justify-between">
-                      <h3 className={`font-medium ${text}`}>{proj.title}</h3>
+                      <h3 className={`font-medium text-sm sm:text-base ${text}`}>{proj.title}</h3>
                       {proj.link && <a href={proj.link} target="_blank" rel="noreferrer" className={`transition-colors ${textLink}`}><ExternalLink className="w-4 h-4" /></a>}
                     </div>
-                    {proj.description && <p className={`text-sm mt-2 leading-relaxed ${textMuted}`}>{proj.description}</p>}
+                    {proj.description && <p className={`text-xs sm:text-sm mt-2 leading-relaxed ${textMuted}`}>{proj.description}</p>}
                     {proj.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1.5 mt-3">
                         {proj.tags.map((tag) => (<span key={tag} className={`text-xs px-2 py-0.5 rounded ${tagBg}`}>{tag}</span>))}

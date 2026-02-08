@@ -68,24 +68,29 @@ export default function TemplatePicker() {
               >
                 {/* Preview thumbnail area */}
                 <div className="h-48 bg-gradient-to-br from-white/[0.04] to-white/[0.02] flex items-center justify-center relative overflow-hidden">
-                  <span className="text-4xl font-bold text-white/10">{t.name[0]}</span>
+                  {t.thumbnail ? (
+                    <img 
+                      src={t.thumbnail} 
+                      alt={`${t.name} template preview`}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-4xl font-bold text-white/10">{t.name[0]}</span>
+                  )}
                   
                   {/* Hover overlay with preview button */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <Button
                       onClick={(e) => {
                         e.stopPropagation();
-                        if (t.previewUrl) {
-                          setPreviewing(t.previewUrl);
-                        } else {
-                          // For minimal, preview user's own portfolio
-                          setPreviewing(`/portfolio/${profile.settings.slug}`);
-                        }
+                        // Preview user's own portfolio with the selected template
+                        updateSettings({ template: t.id });
+                        setPreviewing(`/portfolio/${profile.settings.slug}`);
                       }}
                       variant="ghost"
                       className="text-white border border-white/30 hover:bg-white/20 gap-2"
                     >
-                      <Eye className="w-4 h-4" /> Preview Sample
+                      <Eye className="w-4 h-4" /> Preview with My Data
                     </Button>
                   </div>
                 </div>

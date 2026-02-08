@@ -33,10 +33,10 @@ export default function GeekyTemplate({ profile }: { profile: ProfileData }) {
     <div className="min-h-screen bg-white">
       {/* Navbar */}
       <nav className="border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-gray-900">{`{•••}`}</span>
-            <span className="text-xl font-bold text-emerald-500">
+            <span className="text-lg sm:text-xl font-bold text-gray-900">{`{•••}`}</span>
+            <span className="text-lg sm:text-xl font-bold text-emerald-500">
               {profile.name.split(" ")[0].toLowerCase()}
             </span>
           </div>
@@ -61,41 +61,41 @@ export default function GeekyTemplate({ profile }: { profile: ProfileData }) {
         initial="hidden"
         animate="visible"
         custom={idx++}
-        className="max-w-6xl mx-auto px-6 py-16"
+        className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16"
       >
-        <div className="flex flex-col md:flex-row items-center gap-10">
+        <div className="flex flex-col-reverse md:flex-row items-center gap-8 sm:gap-10 text-center md:text-left">
           <div className="flex-1">
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.1]">
               Welcome<span className="text-emerald-500">!</span>
             </h1>
-            <p className="text-2xl md:text-3xl text-gray-600 mt-2 font-medium">
+            <p className="text-xl sm:text-2xl md:text-3xl text-gray-600 mt-2 font-medium">
               to {profile.name}'s Portfolio
             </p>
             {s.showAbout && profile.about && (
-              <p className="text-gray-400 mt-6 leading-relaxed max-w-md">{profile.about}</p>
+              <p className="text-gray-400 mt-4 sm:mt-6 leading-relaxed max-w-md mx-auto md:mx-0 text-sm sm:text-base">{profile.about}</p>
             )}
             {profile.email && (
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center gap-2 mt-8 px-6 py-3 bg-emerald-500 text-white font-medium rounded-lg hover:bg-emerald-600 transition-colors"
+                className="inline-flex items-center gap-2 mt-6 sm:mt-8 px-5 sm:px-6 py-2.5 sm:py-3 bg-emerald-500 text-white text-sm sm:text-base font-medium rounded-lg hover:bg-emerald-600 transition-colors"
               >
                 Know About Me
               </a>
             )}
           </div>
-          <div className="w-56 h-56 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-6xl font-bold text-gray-400 shrink-0 shadow-lg">
+          <div className="w-40 h-40 sm:w-56 sm:h-56 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center text-5xl sm:text-6xl font-bold text-gray-400 shrink-0 shadow-lg">
             {initials}
           </div>
         </div>
       </motion.section>
 
-      <div className="max-w-6xl mx-auto px-6 space-y-16 pb-20">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-12 sm:space-y-16 pb-16 sm:pb-20">
         {/* Experience */}
         {s.showExperience && profile.experience.length > 0 && (
           <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={idx++}>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">Experience</h2>
-            <div className="h-1 w-32 bg-emerald-400 rounded mb-8" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Experience</h2>
+            <div className="h-1 w-24 sm:w-32 bg-emerald-400 rounded mb-6 sm:mb-8" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {profile.experience.map((exp) => (
                 <div key={exp.id} className="rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
                   <span className="text-xs text-emerald-500 font-semibold">{exp.startDate} — {exp.current ? "Present" : exp.endDate}</span>
@@ -143,9 +143,9 @@ export default function GeekyTemplate({ profile }: { profile: ProfileData }) {
         {/* Projects */}
         {s.showProjects && profile.projects.length > 0 && (
           <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={idx++}>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">Projects</h2>
-            <div className="h-1 w-32 bg-emerald-400 rounded mb-8" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Projects</h2>
+            <div className="h-1 w-24 sm:w-32 bg-emerald-400 rounded mb-6 sm:mb-8" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {profile.projects.map((proj) => (
                 <div key={proj.id} className="rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
                   <div className="h-32 bg-gradient-to-br from-emerald-50 to-teal-50 flex items-center justify-center">
@@ -178,9 +178,9 @@ export default function GeekyTemplate({ profile }: { profile: ProfileData }) {
         {/* Posts */}
         {s.showPosts && profile.posts.length > 0 && (
           <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={idx++}>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">Blog Posts</h2>
-            <div className="h-1 w-32 bg-emerald-400 rounded mb-8" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Blog Posts</h2>
+            <div className="h-1 w-24 sm:w-32 bg-emerald-400 rounded mb-6 sm:mb-8" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {profile.posts.map((post) => (
                 <div key={post.id} className="rounded-xl border border-gray-100 p-5 hover:shadow-md transition-shadow">
                   <p className="text-xs text-emerald-500 font-medium">{post.date}</p>

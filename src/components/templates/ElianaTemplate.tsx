@@ -30,12 +30,12 @@ export default function ElianaTemplate({ profile }: { profile: ProfileData }) {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-white">
       {/* Nav */}
-      <nav className="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
-        <span className="text-xl font-bold text-gray-800 tracking-tight">
+      <nav className="max-w-5xl mx-auto px-4 sm:px-6 py-4 sm:py-6 flex items-center justify-between">
+        <span className="text-lg sm:text-xl font-bold text-gray-800 tracking-tight">
           {profile.name.split(" ")[0].toLowerCase()}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">.</span>
         </span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           {profile.linkedin && (
             <a href={`https://${profile.linkedin}`} target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-700 transition-colors">
               <Linkedin className="w-5 h-5" />
@@ -47,7 +47,7 @@ export default function ElianaTemplate({ profile }: { profile: ProfileData }) {
             </a>
           )}
           {profile.email && (
-            <a href={`mailto:${profile.email}`} className="px-4 py-2 text-sm rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-pink-200 transition-all">
+            <a href={`mailto:${profile.email}`} className="px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-pink-200 transition-all">
               Contact
             </a>
           )}
@@ -60,21 +60,21 @@ export default function ElianaTemplate({ profile }: { profile: ProfileData }) {
         initial="hidden"
         animate="visible"
         custom={idx++}
-        className="max-w-5xl mx-auto px-6 py-16 text-center"
+        className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16 text-center"
       >
-        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-orange-300 to-pink-400 flex items-center justify-center text-white text-3xl font-bold mx-auto mb-6 shadow-lg shadow-pink-200">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-orange-300 to-pink-400 flex items-center justify-center text-white text-2xl sm:text-3xl font-bold mx-auto mb-4 sm:mb-6 shadow-lg shadow-pink-200">
           {initials}
         </div>
-        <p className="text-gray-500 text-lg mb-2">Hi! I'm {profile.name.split(" ")[0]} 👋</p>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight max-w-2xl mx-auto">
+        <p className="text-gray-500 text-base sm:text-lg mb-2">Hi! I'm {profile.name.split(" ")[0]} 👋</p>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight max-w-2xl mx-auto">
           {profile.role}
         </h1>
         {s.showAbout && profile.about && (
-          <p className="text-gray-500 mt-6 max-w-xl mx-auto leading-relaxed">{profile.about}</p>
+          <p className="text-gray-500 mt-4 sm:mt-6 max-w-xl mx-auto leading-relaxed text-sm sm:text-base px-2">{profile.about}</p>
         )}
       </motion.section>
 
-      <div className="max-w-4xl mx-auto px-6 space-y-16 pb-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-10 sm:space-y-16 pb-16 sm:pb-20">
         {/* Experience */}
         {s.showExperience && profile.experience.length > 0 && (
           <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={idx++}>
@@ -129,8 +129,8 @@ export default function ElianaTemplate({ profile }: { profile: ProfileData }) {
         {/* Projects */}
         {s.showProjects && profile.projects.length > 0 && (
           <motion.section variants={fadeUp} initial="hidden" animate="visible" custom={idx++}>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-6">Projects</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-4 sm:mb-6">Projects</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {profile.projects.map((proj) => (
                 <div key={proj.id} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                   <div className="flex items-start justify-between">
